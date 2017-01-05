@@ -1,0 +1,19 @@
+<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+<div style="color:black; font-size: 150%; width: 50%; margin: 0 auto;">
+	<div>
+		<div>Parking Spot #{{parkingSpot}}</div> <br>
+		<div>Garage Location: {{garageLoc}}</div>
+	</div>
+	<br>
+	<div>
+		<span>Status: </span> <br>
+		<select class="form-control" name="status" data-ng-model="selectedStatus" data-ng-options="status for status in statusList" ng-change="ifDefault()"></select> <br>
+	</div>
+
+	<reservation-data></reservation-data>
+
+	<default-data></default-data>
+
+	<empty-data></empty-data>
+</div>

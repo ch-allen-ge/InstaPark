@@ -1,0 +1,42 @@
+.flex-rectangle{
+    width: 5%;
+    background:#707070;
+    padding:10px;
+    position: relative;
+    display:inline-block;
+}
+
+.flex-rectangle:before{
+    content: "";
+    display: block;
+}
+
+.nav-tabs > li, .nav-pills > li {
+    float:none;
+    display:inline-block;
+    *display:inline; /* ie7 fix */
+     zoom:1; /* hasLayout ie7 trigger */
+}
+
+.nav-tabs, .nav-pills {
+    text-align:center;
+}
+
+.pointer { cursor: pointer; }
+
+.usingWhitespace {
+    white-space: pre;
+}
+
+#editButton {
+    text-align: center;
+}
+
+body { 
+  background: url(/images/greyWood.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  overflow: hidden;
+}

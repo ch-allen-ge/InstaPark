@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="InstaPark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>InstaPark</title>
+
+    <link href="css/angular-material.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/frontPageStyle.css" rel="stylesheet">
+    <link href="css/material.min.css" rel="stylesheet">
+    <link href="css/mdl-icon.css" rel="stylesheet">
+    <link href="css/popupStyles.css" rel="stylesheet">
+    <link href="css/navigationDrawerStyle.css" rel="stylesheet">
+    <link href="css/material.min.css" rel="stylesheet">
+    <link href="css/mdl-icon.css" rel="stylesheet">
+    <link href="css/popupStyles.css" rel="stylesheet">
+
+    <script src="/js/vendor/angular.min.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/vendor/jquery.js"></script>
+    <script src="/js/vendor/bootstrap.js"></script>
+    <script src="/js/vendor/mdl-material.min.js"></script>
+    <script src="/js/vendor/angular-animate.min.js"></script>
+    <script src="/js/vendor/angular-aria.min.js"></script>
+    <script src="/js/vendor/angular-material.js"></script>
+    <script src="/js/vendor/angular-messages.min.js"></script>
+    <script src="/js/factorys/parkingFactory.js"></script>
+    
+    <script src="/js/controllers/section-controller.js"></script>
+    <script src="/js/controllers/date-controller.js"></script>
+    <script src="/js/controllers/data-controller.js"></script>
+</head>
+
+<body>
+    <script src="/js/controllers/sidebar-data-controller.js"></script>
+</head>
+
+<body>
+    <div id="main">
+      <div ng-controller="DateController as dateCtrl">
+      <div ng-controller="SectionController as sectionCtrl">
+
+      <div id="dataAndCars" ng-controller="DataController as dataCtrl">
+
+        <div class="mdl-layout mdl-js-layout">  
+          <main class="mdl-layout__content">  
+
+            <!-- DATE PICKER -->
+            <div style="text-align: center; background: white">
+              <md-datepicker ng-model="dateCtrl.viewDate" md-placeholder="Today's date" ng-change="dateCtrl.setDate(); sectionCtrl.changeDate()"></md-datepicker>
+            </div>
+
+            <!-- CAR DISPLAY -->
+            <div class="mdl-tabs mdl-js-tabs" style="margin-top: 0px;">
+                  <div class="mdl-tabs__tab-bar">
+                     <a href="#nese" style = "color: white;" class="mdl-tabs__tab is-active" ng-click="dataCtrl.clearText()"><b>NE/SE</b></a>
+                     <a href="#nwsw" style = "color: white" class="mdl-tabs__tab" ng-click="dataCtrl.clearText()"><b>NW/SW</b></a>
+                  </div>
+                  <div class="mdl-tabs__panel is-active" id="nese">
+                     <nese-view></nese-view>
+                  </div>
+                  <div class="mdl-tabs__panel" id="nwsw">
+                     <nwsw-view></nwsw-view>
+                  </div>
+            </div>
+
+             <!-- INFORMATION DISPLAY -->
+            <div id="popupContainer" class="md-padding" style="margin-top: 10px" ng-cloak>
+              <!-- DATA -->
+              <div class='usingWhitespace dialog-demo-content' style="text-align: center; color: white; font-size:150%">{{dataCtrl.data}}</div> <br>
+
+                <div style="text-align: center;">
+                  <!-- button to make new reservation-->
+                  <md-button class="md-primary md-raised" ng-show="dataCtrl.displayNewReservationButton" ng-click="sectionCtrl.showAdvanced($event)" flex flex-md="100" style="position: relative;">
+                    NEW RESERVATION
+                  </md-button>
+
+                  <!-- button to delete current reservation -->
+                  <md-button class="md-primary md-raised" ng-show="dataCtrl.displayDeleteButton" ng-click="sectionCtrl.showConfirm($event)" style="position: relative;">
+                    DELETE RESERVATION
+                  </md-button>
+                </div>
+            </div>
+          </main>
+        </div>
+      </div> 
+      </div>
+      </div>
+    </div>
+</body>
+</html>
