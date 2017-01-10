@@ -2,7 +2,7 @@
   <form>
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <h2>New Reservation Spot #</h2> {{parkingSpot}}
+        <span  class="description"><h2>New Reservation Spot #{{parkingSpot}}</h2></span>
         <span flex></span>
       </div>
     </md-toolbar>
@@ -15,8 +15,11 @@
       </md-input-container>
 
       <!-- Date fields for reservation dates -->
+      <span class="nextLine"><br></span>
       <md-datepicker ng-model="beginParkDate" ng-change="changeDate()"></md-datepicker> 
-      <span> thru </span>
+      <span class="noIndent"> through </span>
+      <span class="indent" style="margin-left: 31%"> <br>through </span>
+      <span class="nextLine"><br></span>
       <md-datepicker ng-model="endParkDate"></md-datepicker> <br><br>
 
       <!-- text box for reason -->

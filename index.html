@@ -12,10 +12,16 @@
     <link href="css/frontPageStyle.css" rel="stylesheet">
     <link href="css/material.min.css" rel="stylesheet">
     <link href="css/mdl-icon.css" rel="stylesheet">
-    <link href="css/popupStyles.css" rel="stylesheet">
     <link href="css/material.min.css" rel="stylesheet">
-    <link href="css/mdl-icon.css" rel="stylesheet">
-    <link href="css/popupStyles.css" rel="stylesheet">
+
+
+    <link rel='stylesheet' media='screen and (max-width: 700px)' href='css/narrow.css' />
+    <link rel='stylesheet' media='screen and (max-width: 700px)' href='css/popupNarrow.css' />
+
+    <link rel='stylesheet' media='screen and (min-width: 701px)' href='css/wide.css' />
+    <link rel='stylesheet' media='screen and (min-width: 701px)' href='css/popupWide.css' />
+
+    <link rel='stylesheet' media='screen and (max-height: 200px)' href='css/phoneWide.css' />
 
     <link rel="shortcut icon" type="image/png" href="/images/parkingIcon.png"/>
 
@@ -41,7 +47,7 @@
 </head>
 
 <body>
-    <div id="main">
+    <div id="main" style="overflow:scroll">
       <div ng-controller="DateController as dateCtrl">
       <div ng-controller="GarageController as garageCtrl">
 
@@ -56,8 +62,8 @@
             <!-- CAR DISPLAY -->
             <div class="mdl-tabs mdl-js-tabs" style="margin-top: 0px;">
                   <div class="mdl-tabs__tab-bar">
-                     <a href="#nese" style = "color: white;" class="mdl-tabs__tab is-active" ng-click="garageCtrl.clearText()"><b>East</b></a>
-                     <a href="#nwsw" style = "color: white" class="mdl-tabs__tab" ng-click="garageCtrl.clearText()"><b>West</b></a>
+                     <a href="#nese" style = "color: white;" class="mdl-tabs__tab is-active" ng-click="garageCtrl.clearText()"><span class="tabText"><b>East</b></span></a>
+                     <a href="#nwsw" style = "color: white" class="mdl-tabs__tab" ng-click="garageCtrl.clearText()"><span class="tabText"><b>West</b></span></a>
                   </div>
                   <div class="mdl-tabs__panel is-active" id="nese">
                      <nese-view></nese-view>
@@ -70,19 +76,18 @@
              <!-- INFORMATION DISPLAY -->
             <div id="popupContainer" class="md-padding" style="margin-top: 10px" ng-cloak>
               <!-- DATA -->
-              <div class='usingWhitespace dialog-demo-content' style="text-align: center; color: white; font-size:150%">{{garageCtrl.data}}</div> <br>
-
-                <div style="text-align: center;">
+              <div class='usingWhitespace dialog-demo-content data' style="text-align: center; color: white">{{garageCtrl.data}}</div> <br>
+              <div style="text-align: center;">
                   <!-- button to make new reservation-->
-                  <md-button class="md-primary md-raised" ng-show="garageCtrl.displayNewReservationButton" ng-click="garageCtrl.showAdvanced($event)" flex flex-md="100" style="position: relative;">
-                    NEW RESERVATION
-                  </md-button>
+                <md-button class="md-primary md-raised" ng-show="garageCtrl.displayNewReservationButton" ng-click="garageCtrl.showAdvanced($event)" flex flex-md="100" style="position: relative;">
+                  NEW RESERVATION
+                </md-button>
 
                   <!-- button to delete current reservation -->
-                  <md-button class="md-primary md-raised" ng-show="garageCtrl.displayDeleteButton" ng-click="garageCtrl.showConfirm($event)" style="position: relative;">
-                    DELETE RESERVATION
-                  </md-button>
-                </div>
+                <md-button class="md-primary md-raised" ng-show="garageCtrl.displayDeleteButton" ng-click="garageCtrl.showConfirm($event)" style="position: relative;">
+                  DELETE RESERVATION
+                </md-button>
+              </div>
             </div>
           </main>
         </div>

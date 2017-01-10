@@ -1,26 +1,3 @@
-.flex-rectangle{
-    max-width: 5%;
-    background:#707070;
-    padding: 0.5%;
-    position: relative;
-    display:inline-block;
-}
-
-
-/*.flex-rectangle{
-    max-width: 4%;
-    background:#707070;
-    padding:1%;
-    position: relative;
-    display:inline-block;
-}*/
-
-
-.flex-rectangle:before{
-    content: "";
-    display: block;
-}
-
 .nav-tabs > li, .nav-pills > li {
     float:none;
     display:inline-block;
@@ -42,6 +19,10 @@
 
 #editButton {
     text-align: center;
+}
+
+body {
+  overflow: scroll;
 }
 
 body { 

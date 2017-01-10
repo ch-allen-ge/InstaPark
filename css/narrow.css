@@ -1,0 +1,23 @@
+.flex-rectangle {
+    max-width: 4.8%;
+    background:#707070;
+    padding: 0.5%;
+    position: relative;
+    display:inline-block;
+}
+
+.numberText {
+    font-size: 80%;
+}
+
+.data {
+    font-size: 100%;
+}
+
+.tabText {
+    font-size: 80%;
+}
+
+.indicator {
+    color: red;
+}

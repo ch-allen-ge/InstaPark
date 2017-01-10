@@ -1,0 +1,15 @@
+.description {
+	font-size: 80%;
+}
+
+.nextLine {
+	display: block;
+}
+
+.noIndent {
+	display: none;
+}
+
+.indent {
+	display: block;
+}

@@ -119,7 +119,6 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
     }
 
     garage.createReservation = function(data, callback) {
-
         var todaysDate = new Date();
         var parkingSpot = parkingFactory.getCarSelected();
         $http({
