@@ -14,10 +14,8 @@ connection.connect();
 var queryDate;
 
 exports.getInfo = function(parkingArea, viewDate, callback) {
-
+	
 	var parkingList = [];
-	var reservationsList = [];
-	var defaultList = [];
 	var dummyDate = new Date(viewDate);
 	queryDate = dummyDate.getFullYear()+ "-" + twoDigitMonth(dummyDate.getMonth()) + "-" + twoDigitDay(dummyDate.getDate());
 
@@ -44,7 +42,6 @@ exports.getInfo = function(parkingArea, viewDate, callback) {
 			if (err) {
 				console.log(err);
 			} else if (rows.length != 0) { //found some reservations
-				//console.log(rows.length);
 				for (var i=0; i<rows.length; i++) { //add all reservations to array
 					parkingList.push({
 						type: 'reservation',
@@ -58,14 +55,9 @@ exports.getInfo = function(parkingArea, viewDate, callback) {
 					 	end_park_date: rows[i].end_park_date,
 					 	parkerName: rows[i].parker_last_name					
 					});	
-
-					reservationsList.push({
-						type: 'reservation',
-					 	parkingSpot : rows[i].parking_spot,					
-					});	
 				}
 			} else { //no reservations
-				//console.log('NO RESERVATIONS IN '+ parkingArea + ' AREA');
+
 			}
 
 			callbackOne();
@@ -73,12 +65,11 @@ exports.getInfo = function(parkingArea, viewDate, callback) {
 	}
 
 	function getDefaults(callbackTwo) {
-		connection.query('SELECT a.parking_spot, a.handicap, a.small, a.garage_loc, b.last_name FROM parkingspot a, parker b WHERE a.reservation_parker=0 and a.parking_spot=b.default_park_spot_id and a.garage_loc="'+parkingArea+'"',  function(err, rows, fields) {			
+		connection.query('SELECT a.parking_spot, a.handicap, a.small, a.garage_loc, b.last_name FROM parkingspot a, parker b WHERE b.last_name != "Visiting" and a.reservation_parker=0 and a.parking_spot=b.default_park_spot_id and a.garage_loc="'+parkingArea+'"',  function(err, rows, fields) {			
 			if (err) {
 				console.log(err);
-			} else if (rows != null) {
-				// console.log('FOUND DEFAULT SPOTS');
-				for (var i=0; i<rows.length; i++) { //add all reservations to array
+			} else if (rows.length != 0) {
+				for (var i=0; i<rows.length; i++) { //add all defaults to array
 					parkingList.push({
 						type: 'default',
 					 	parkingSpot : rows[i].parking_spot,
@@ -87,30 +78,38 @@ exports.getInfo = function(parkingArea, viewDate, callback) {
 					 	garage_loc: rows[i].garage_loc,
 					 	parkerName: rows[i].last_name					
 					});	
-
-					defaultList.push({
-						type: 'default',
-					 	parkingSpot : rows[i].parking_spot,					
-					});	
 				}
 			}
 
 			callbackTwo();
 		});
 	}
+
+	function getEmptys(callbackThree) {
+		connection.query('SELECT a.parking_spot, a.garage_loc, a.description, b.last_name FROM parkingspot a, parker b WHERE b.last_name = "Visiting" and a.parking_spot=b.default_park_spot_id and a.garage_loc="'+parkingArea+ '" and a.reservation_parker=0 and a.default_parker = 0',  function(err, rows, fields) {			
+			if (err) {
+				console.log(err);
+			} else if (rows.length != 0) {
+				for (var i=0; i<rows.length; i++) { //add all emptys to array
+					parkingList.push({
+						type: 'empty',
+					 	parkingSpot : rows[i].parking_spot,
+					 	garage_loc: rows[i].garage_loc,
+					 	description: rows[i].description,
+					 	parkerName: rows[i].last_name					
+					});	
+				}
+			}
+
+			callbackThree();
+		});
+	}
 	
 	getReservations(function() {
 		getDefaults(function() {
-			//console.log('......................................');
-			// console.log(parkingArea + 'RESERVATIONS');
-			// console.log(reservationsList);
-
-			// console.log(parkingArea + 'DEFAULT');
-			// console.log(defaultList);
-
-			//console.log(parkingList);
-
-			return callback(parkingList);
+			getEmptys(function() {
+				return callback(parkingList);
+			});
 		});
 	});
 }
@@ -248,7 +247,6 @@ exports.fixReservations = function(viewDate, callback) {
 					console.log(err);
 				}
 			});
-			// console.log("NOT CURRENT: " + endedReservations[m]);
 		}
 
 		for (var k=0; k<currentReservations.length; k++) {
@@ -257,7 +255,6 @@ exports.fixReservations = function(viewDate, callback) {
 					console.log(err);
 				}
 			});
-			// console.log("CURRRENT: " + currentReservations[k]);
 		}
 
 		callbackTwo();
