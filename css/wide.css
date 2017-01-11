@@ -6,21 +6,8 @@
     display:inline-block;
 }
 
-.flex-rectangle:before {
-    content: "";
-    display: block;
-}
-
-.numberText {
-    font-size: 100%;
-}
-
 .data {
 	font-size: 150%;
-}
-
-.indicator {
-    color: green;
 }
 
 .tabText {
