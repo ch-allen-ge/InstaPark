@@ -29,7 +29,7 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
             .then(function transferData(response) {
               var neseArray = response.data.theData;
 
-              //console.log(neseArray);
+              console.log(neseArray);
 
               garage.NESEObjectArray = neseArray;
               parkingFactory.setNESECars(garage.NESEObjectArray); 
@@ -37,12 +37,22 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
             .then(function showCars() {
               var theArray = [];
               for (var i=0; i<garage.NESEObjectArray.length; i++) {
-                if (garage.NESEObjectArray[i].type === 'default') {
-                  theArray.push('/images/redCarFacingUp.png');
-                } else if (garage.NESEObjectArray[i].type === 'reservation') {
-                  theArray.push('/images/yellowCarFacingUp.png');
-                } else if (garage.NESEObjectArray[i].type === 'empty') {
-                  theArray.push('/images/greenCarFacingUp.png');
+                if (garage.NESEObjectArray[i].parkingSpot >= 16 && garage.NESEObjectArray[i].parkingSpot <=29) {
+                  if (garage.NESEObjectArray[i].type === 'default') {
+                    theArray.push('/images/redCarFacingDown.png');
+                  } else if (garage.NESEObjectArray[i].type === 'reservation') {
+                    theArray.push('/images/yellowCarFacingDown.png');
+                  } else if (garage.NESEObjectArray[i].type === 'empty') {
+                    theArray.push('/images/greenCarFacingDown.png');
+                  }
+                } else {
+                  if (garage.NESEObjectArray[i].type === 'default') {
+                    theArray.push('/images/redCarFacingUp.png');
+                  } else if (garage.NESEObjectArray[i].type === 'reservation') {
+                    theArray.push('/images/yellowCarFacingUp.png');
+                  } else if (garage.NESEObjectArray[i].type === 'empty') {
+                    theArray.push('/images/greenCarFacingUp.png');
+                  }
                 }
               }
 
@@ -65,17 +75,27 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
 
               garage.NWSWObjectArray = nwswArray;
               parkingFactory.setNWSWCars(garage.NWSWObjectArray);
-              //console.log(garage.NWSWObjectArray);  
+              console.log(garage.NWSWObjectArray);  
             })
             .then(function showCars() {
               var theArray = [];
               for (var i=0; i<garage.NWSWObjectArray.length; i++) {
-                if (garage.NWSWObjectArray[i].type === 'default') {
-                  theArray.push('/images/redCarFacingUp.png');
-                } else if (garage.NWSWObjectArray[i].type === 'reservation') {
-                  theArray.push('/images/yellowCarFacingUp.png');
-                } else if (garage.NWSWObjectArray[i].type === 'empty') {
-                  theArray.push('/images/greenCarFacingUp.png');
+                if (garage.NWSWObjectArray[i].parkingSpot >= 1 && garage.NWSWObjectArray[i].parkingSpot <=15) {
+                  if (garage.NWSWObjectArray[i].type === 'default') {
+                    theArray.push('/images/redCarFacingDown.png');
+                  } else if (garage.NWSWObjectArray[i].type === 'reservation') {
+                    theArray.push('/images/yellowCarFacingDown.png');
+                  } else if (garage.NWSWObjectArray[i].type === 'empty') {
+                    theArray.push('/images/greenCarFacingDown.png');
+                  }
+                } else {
+                  if (garage.NWSWObjectArray[i].type === 'default') {
+                    theArray.push('/images/redCarFacingUp.png');
+                  } else if (garage.NWSWObjectArray[i].type === 'reservation') {
+                    theArray.push('/images/yellowCarFacingUp.png');
+                  } else if (garage.NWSWObjectArray[i].type === 'empty') {
+                    theArray.push('/images/greenCarFacingUp.png');
+                  }
                 }
               }
 
