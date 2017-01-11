@@ -166,7 +166,7 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
         targetEvent: ev,
         clickOutsideToClose:true
       })
-      .then(function(result) {        
+      .then(function(result) { 
         garage.createReservation({
             parkerName: result.parkerName,
             beginParkDate: result.beginParkDate,
@@ -182,26 +182,41 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
       $scope.endParkDate = parkingFactory.getDateSelected();
       $scope.reason = "";
       $scope.parkingSpot = parkingFactory.getCarSelected();
+      $scope.invalid;
 
       $scope.changeDate = function() {
         $scope.endParkDate = $scope.beginParkDate;
       }
 
+      $scope.checkValid = function(isValid) {
+        if (isValid) {
+          $scope.submit();
+          $scope.invalid = false;
+        } else {
+          $scope.invalid = true;
+        }
+      }
+
       $scope.hide = function() {
         $mdDialog.hide();
       };
+
       $scope.cancel = function() {
         $mdDialog.cancel();
       };
+
       $scope.submit = function() {
         var info = {
             parkerName: $scope.parkerName,
             beginParkDate: $scope.beginParkDate,
             endParkDate: $scope.endParkDate,
-            reason: $scope.reason
+            reason: $scope.reason,
+            isValid: $scope.parkerName.$valid
         }
         $mdDialog.hide(info);
       };
+
+
     }
 
     var twoDigitMonth = function(month) {

@@ -1,5 +1,5 @@
 <md-dialog aria-label="New Reservation" ng-cloak flex="45">
-  <form>
+  <form name="myForm" novalidate>
     <md-toolbar>
       <div class="md-toolbar-tools">
         <span  class="description"><h2>New Reservation Spot #{{parkingSpot}}</h2></span>
@@ -7,11 +7,13 @@
       </div>
     </md-toolbar>
 
+    <span ng-show="invalid" style="color: red; margin-left: 10px">Parker name is required</span>
+
     <md-dialog-content style="max-width:830px;max-height:810px; ">
       <!-- Name field for reserver -->
       <md-input-container style="margin-top: 25px; margin-left: 10px;" flex>
           <label>Parker's Name</label>
-          <input ng-model="parkerName">
+          <input ng-model="parkerName" name="parkerName" required>
       </md-input-container>
 
       <!-- Date fields for reservation dates -->
@@ -34,38 +36,10 @@
         <md-button ng-click="cancel()" style="margin-right:20px;" >
           Cancel
         </md-button>
-        <md-button ng-click="submit(); " style="margin-right:20px;" >
+        <md-button ng-click="checkValid(myForm.parkerName.$valid); " style="margin-right:20px;" >
           Submit
         </md-button>
       </div>
     </md-dialog-actions>
   </form>
 </md-dialog>
-
-
-
-
-
-
-
-
-
-
-<!-- <md-dialog aria-label="Mango (Fruit)"  ng-cloak>
-  <form>
-  <md-toolbar>
-    <div class="md-toolbar-tools">
-      <h2>Mango (Fruit)</h2>
-    </div>
-  </md-toolbar>
-    
-  <div class="md-actions" layout="row">
-    <md-button ng-click="answer('not useful')">
-     Not Useful
-    </md-button>
-    <md-button ng-click="answer('useful')" style="margin-right:20px;" >
-      Useful
-    </md-button>
-  </div>
-  </form>
-</md-dialog> -->
