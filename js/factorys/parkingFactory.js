@@ -91,7 +91,8 @@ angular.module('InstaPark').factory('parkingFactory', function() {
 			return {
 				type: 'empty',
 				parkingSpot: spot.parkingSpot,
-				garageLoc: spot.garage_loc
+				garageLoc: spot.garage_loc,
+				description: spot.description
 			}
 		} else {
 			return 'error';

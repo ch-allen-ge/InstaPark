@@ -29,7 +29,7 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
             .then(function transferData(response) {
               var neseArray = response.data.theData;
 
-              console.log(neseArray);
+              //console.log(neseArray);
 
               garage.NESEObjectArray = neseArray;
               parkingFactory.setNESECars(garage.NESEObjectArray); 
@@ -65,7 +65,7 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
 
               garage.NWSWObjectArray = nwswArray;
               parkingFactory.setNWSWCars(garage.NWSWObjectArray);
-              console.log(garage.NWSWObjectArray);  
+              //console.log(garage.NWSWObjectArray);  
             })
             .then(function showCars() {
               var theArray = [];
@@ -309,7 +309,6 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
       }
 
       var data = parkingFactory.getNWSWCars(spotNum);
-      console.log(data);
       garage.displayData(data);
       parkingFactory.setCarSelected(num);
       parkingFactory.setGarageLoc('WEST');
