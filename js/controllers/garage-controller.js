@@ -129,8 +129,6 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
         }).then(function getparking(response) {
             garage.getParkingData('EAST');
             garage.getParkingData('WEST');
-        }).then(function getdefault(response) {
-            garage.getDefaultData();
         })
     }
 
@@ -388,6 +386,8 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
     }
 
     garage.changeDate();
+
+    garage.getDefaultData();
 }]);
 
 angular.module('InstaPark').directive("eastSection", function() {
