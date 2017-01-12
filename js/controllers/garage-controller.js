@@ -312,14 +312,14 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
       garage.displayDeleteButton = false;
     };
 
-    garage.showNESEData = function(num) {     
+    garage.showEastData = function(num) {     
       var data = parkingFactory.getNESECars(num-16);
       garage.displayData(data);
       parkingFactory.setCarSelected(num);
       parkingFactory.setGarageLoc('EAST');
     }
 
-    garage.showNWSWData = function(num, area) {
+    garage.showWestData = function(num, area) {
       var spotNum;
 
       if (area === 'SW') {
