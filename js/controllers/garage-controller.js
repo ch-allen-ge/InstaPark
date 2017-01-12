@@ -37,7 +37,7 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
             .then(function showCars() {
               var theArray = [];
               for (var i=0; i<garage.NESEObjectArray.length; i++) {
-                if (garage.NESEObjectArray[i].parkingSpot >= 16 && garage.NESEObjectArray[i].parkingSpot <=29) {
+                if (garage.NESEObjectArray[i].parkingSpot >= 16 && garage.NESEObjectArray[i].parkingSpot <= 29) {
                   if (garage.NESEObjectArray[i].type === 'default') {
                     theArray.push('/images/redCarFacingDown.png');
                   } else if (garage.NESEObjectArray[i].type === 'reservation') {
