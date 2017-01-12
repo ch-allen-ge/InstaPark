@@ -1,7 +1,7 @@
 angular.module('InstaPark').factory('parkingFactory', function() {
 	
-	var NESECars = [];
-	var NWSWCars = [];
+	var EastCars = [];
+	var WestCars = [];
 	var defaultCars = [];
 	var currentCarSelected = null;
 	var currentGarageLoc = '';
@@ -31,12 +31,12 @@ angular.module('InstaPark').factory('parkingFactory', function() {
 		return currentGarageLoc;
 	}
 
-	var setNESECars = function(array) {
-		NESECars = array;
+	var setEastCars = function(array) {
+		EastCars = array;
 	}
 
-	var setNWSWCars = function(array) {
-		NWSWCars = array;
+	var setWestCars = function(array) {
+		WestCars = array;
 	}
 
 
@@ -44,13 +44,13 @@ angular.module('InstaPark').factory('parkingFactory', function() {
 		defaultCars = array;
 	}
 
-	var getNESECars = function(num) {
-		var spot = NESECars[num];
+	var getEastCars = function(num) {
+		var spot = EastCars[num];
 		return getCars(spot);
 	}
 
-	var getNWSWCars = function(num) {
-		var spot = NWSWCars[num];
+	var getWestCars = function(num) {
+		var spot = WestCars[num];
 		return getCars(spot);
 	}
 
@@ -106,14 +106,14 @@ angular.module('InstaPark').factory('parkingFactory', function() {
 		getCarSelected: getCarSelected,
 		setGarageLoc: setGarageLoc,
 		getGarageLoc: getGarageLoc,
-		setNESECars: setNESECars,
-		getNESECars: getNESECars,
-		setNWSWCars: setNWSWCars,
-		getNWSWCars: getNWSWCars,
+		setEastCars: setEastCars,
+		getEastCars: getEastCars,
+		setWestCars: setWestCars,
+		getWestCars: getWestCars,
 		setDefaultCars: setDefaultCars,
 		getDefaultCars: getDefaultCars,
 		defaultCars: defaultCars,
-		NESECars: NESECars,
-		NWSWCards: NWSWCars
+		EastCars: EastCars,
+		NWSWCards: WestCars
 	};
 });

@@ -1,22 +1,20 @@
 angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$q', '$mdDialog', 'parkingFactory', function($http, $scope, $q, $mdDialog, parkingFactory) {
 
     var garage = this;
-    garage.NESEObjectArray = null;
-    garage.NWSWObjectArray = null;
-    $scope.NESECarArray = []; //16-29 NE, 30-46 SE
-    $scope.NWSWCarArray = []; //1-15 NW, 47-63 SW
+    garage.EastObjectArray = null;
+    garage.WestObjectArray = null;
+    $scope.EastCarArray = []; //16-29 NE, 30-46 SE
+    $scope.WestCarArray = []; //1-15 NW, 47-63 SW
 
     //DATA CONTROLLER STUFF
     garage.data = "";
     garage.displayNewReservationButton = false;
     garage.displayDeleteButton = false;
-    garage.beginParkDate = "";
-    garage.endParkDate = "";
 
     //WRITE COMMENTS
     garage.getParkingData = function(section) {
         if (section === 'EAST') {
-            $scope.NESECarArray = [];
+            $scope.EastCarArray = [];
 
             $http({
               method: 'POST',
@@ -31,36 +29,36 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
 
               console.log(neseArray);
 
-              garage.NESEObjectArray = neseArray;
-              parkingFactory.setNESECars(garage.NESEObjectArray); 
+              garage.EastObjectArray = neseArray;
+              parkingFactory.setEastCars(garage.EastObjectArray); 
             })
             .then(function showCars() {
               var theArray = [];
-              for (var i=0; i<garage.NESEObjectArray.length; i++) {
-                if (garage.NESEObjectArray[i].parkingSpot >= 16 && garage.NESEObjectArray[i].parkingSpot <= 29) {
-                  if (garage.NESEObjectArray[i].type === 'default') {
+              for (var i=0; i<garage.EastObjectArray.length; i++) {
+                if (garage.EastObjectArray[i].parkingSpot >= 16 && garage.EastObjectArray[i].parkingSpot <= 29) {
+                  if (garage.EastObjectArray[i].type === 'default') {
                     theArray.push('/images/redCarFacingDown.png');
-                  } else if (garage.NESEObjectArray[i].type === 'reservation') {
+                  } else if (garage.EastObjectArray[i].type === 'reservation') {
                     theArray.push('/images/yellowCarFacingDown.png');
-                  } else if (garage.NESEObjectArray[i].type === 'empty') {
+                  } else if (garage.EastObjectArray[i].type === 'empty') {
                     theArray.push('/images/greenCarFacingDown.png');
                   }
                 } else {
-                  if (garage.NESEObjectArray[i].type === 'default') {
+                  if (garage.EastObjectArray[i].type === 'default') {
                     theArray.push('/images/redCarFacingUp.png');
-                  } else if (garage.NESEObjectArray[i].type === 'reservation') {
+                  } else if (garage.EastObjectArray[i].type === 'reservation') {
                     theArray.push('/images/yellowCarFacingUp.png');
-                  } else if (garage.NESEObjectArray[i].type === 'empty') {
+                  } else if (garage.EastObjectArray[i].type === 'empty') {
                     theArray.push('/images/greenCarFacingUp.png');
                   }
                 }
               }
 
-              $scope.NESECarArray = theArray;
+              $scope.EastCarArray = theArray;
             })
         } else if (section === 'WEST') {
 
-            $scope.NWSWCarArray = [];
+            $scope.WestCarArray = [];
 
             $http({
               method: 'POST',
@@ -73,34 +71,34 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
             .then(function transferData(response) {
               var nwswArray = response.data.theData;
 
-              garage.NWSWObjectArray = nwswArray;
-              parkingFactory.setNWSWCars(garage.NWSWObjectArray);
-              console.log(garage.NWSWObjectArray);  
+              garage.WestObjectArray = nwswArray;
+              parkingFactory.setWestCars(garage.WestObjectArray);
+              console.log(garage.WestObjectArray);  
             })
             .then(function showCars() {
               var theArray = [];
-              for (var i=0; i<garage.NWSWObjectArray.length; i++) {
-                if (garage.NWSWObjectArray[i].parkingSpot >= 1 && garage.NWSWObjectArray[i].parkingSpot <=15) {
-                  if (garage.NWSWObjectArray[i].type === 'default') {
+              for (var i=0; i<garage.WestObjectArray.length; i++) {
+                if (garage.WestObjectArray[i].parkingSpot >= 1 && garage.WestObjectArray[i].parkingSpot <=15) {
+                  if (garage.WestObjectArray[i].type === 'default') {
                     theArray.push('/images/redCarFacingDown.png');
-                  } else if (garage.NWSWObjectArray[i].type === 'reservation') {
+                  } else if (garage.WestObjectArray[i].type === 'reservation') {
                     theArray.push('/images/yellowCarFacingDown.png');
-                  } else if (garage.NWSWObjectArray[i].type === 'empty') {
+                  } else if (garage.WestObjectArray[i].type === 'empty') {
                     theArray.push('/images/greenCarFacingDown.png');
                   }
                 } else {
-                  if (garage.NWSWObjectArray[i].type === 'default') {
+                  if (garage.WestObjectArray[i].type === 'default') {
                     theArray.push('/images/redCarFacingUp.png');
-                  } else if (garage.NWSWObjectArray[i].type === 'reservation') {
+                  } else if (garage.WestObjectArray[i].type === 'reservation') {
                     theArray.push('/images/yellowCarFacingUp.png');
-                  } else if (garage.NWSWObjectArray[i].type === 'empty') {
+                  } else if (garage.WestObjectArray[i].type === 'empty') {
                     theArray.push('/images/greenCarFacingUp.png');
                   }
                 }
               }
 
-              $scope.NWSWCarArray = theArray;
-              //console.log($scope.NWSWCarArray);
+              $scope.WestCarArray = theArray;
+              //console.log($scope.WestCarArray);
             })
         }
     }
@@ -233,8 +231,6 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
         }
         $mdDialog.hide(info);
       };
-
-
     }
 
     var twoDigitMonth = function(month) {
@@ -263,11 +259,11 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
       var endParkDate;
 
       if (parkingSpot>=16 && parkingSpot<=46) {
-        carObject = parkingFactory.getNESECars(parkingSpot-16);
+        carObject = parkingFactory.getEastCars(parkingSpot-16);
       } else if (parkingSpot>=1 && parkingSpot<=15) {
-        carObject = parkingFactory.getNWSWCars(parkingSpot-1);
+        carObject = parkingFactory.getWestCars(parkingSpot-1);
       } else {
-        carObject = parkingFactory.getNWSWCars(parkingSpot-32);
+        carObject = parkingFactory.getWestCars(parkingSpot-32);
       }
 
       theBeginParkDate = carObject.beginParkDateYear+''+twoDigitMonth(carObject.beginParkDateMonth-1)+''+twoDigitDay(carObject.beginParkDateDay);
@@ -311,7 +307,7 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
     };
 
     garage.showEastData = function(num) {     
-      var data = parkingFactory.getNESECars(num-16);
+      var data = parkingFactory.getEastCars(num-16);
       garage.displayData(data);
       parkingFactory.setCarSelected(num);
       parkingFactory.setGarageLoc('EAST');
@@ -326,7 +322,7 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
         spotNum = num-1;
       }
 
-      var data = parkingFactory.getNWSWCars(spotNum);
+      var data = parkingFactory.getWestCars(spotNum);
       garage.displayData(data);
       parkingFactory.setCarSelected(num);
       parkingFactory.setGarageLoc('WEST');
@@ -360,8 +356,6 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
                    'Parker: ' + data.parkerName + '\n' +
                    'Reason: ' + data.reason;
 
-        garage.beginParkDate = data.beginParkDateYear + twoDigitMonth(data.beginParkDateMonth-1) + twoDigitDay(data.beginParkDateDay);
-        garage.endParkDate = data.endParkDateYear + twoDigitMonth(data.endParkDateMonth-1) + twoDigitDay(data.endParkDateDay);
         garage.displayDeleteButton = true;
         garage.displayNewReservationButton = false;
       } else if (data.type === 'default') {
@@ -386,7 +380,6 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
     }
 
     garage.changeDate();
-
     garage.getDefaultData();
 }]);
 
