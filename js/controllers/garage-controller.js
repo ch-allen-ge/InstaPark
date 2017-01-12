@@ -390,17 +390,17 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
     garage.changeDate();
 }]);
 
-angular.module('InstaPark').directive("neseView", function() {
+angular.module('InstaPark').directive("eastSection", function() {
     return {
         restrict: "E",
-        templateUrl: "../templates/sections/nese.html"
+        templateUrl: "../templates/sections/east.html"
     };
 });
 
-angular.module('InstaPark').directive("nwswView", function() {
+angular.module('InstaPark').directive("westSection", function() {
     return {
         restrict: "E",
-        templateUrl: "../templates/sections/nwsw.html"
+        templateUrl: "../templates/sections/west.html"
     };
 });
 
