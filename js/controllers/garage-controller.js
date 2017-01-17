@@ -134,6 +134,24 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
         garage.removeAddReservations(parkingFactory.getDateSelected());
     }
 
+    garage.showAdvanced = function(ev) {
+      $mdDialog.show({
+        controller: ReservationController,
+        templateUrl: '/templates/reservation.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true
+      })
+      .then(function(result) { 
+        garage.createReservation({
+            parkerName: result.parkerName,
+            beginParkDate: result.beginParkDate,
+            endParkDate: result.endParkDate,
+            reason: result.reason
+        })
+      });
+    }
+
     garage.createReservation = function(data, callback) {
         var todaysDate = new Date();
         var parkingSpot = parkingFactory.getCarSelected();
@@ -170,27 +188,8 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
 
           garage.displayNewReservationButton = false;
           garage.displayDeleteButton = true;
-        })
-       
+    })
   }
-
-    garage.showAdvanced = function(ev) {
-      $mdDialog.show({
-        controller: ReservationController,
-        templateUrl: '/templates/reservation.html',
-        parent: angular.element(document.body),
-        targetEvent: ev,
-        clickOutsideToClose:true
-      })
-      .then(function(result) { 
-        garage.createReservation({
-            parkerName: result.parkerName,
-            beginParkDate: result.beginParkDate,
-            endParkDate: result.endParkDate,
-            reason: result.reason
-        })
-      });
-    }
 
     function ReservationController($scope, $mdDialog) {
       $scope.parkerName = "";
@@ -327,23 +326,6 @@ angular.module('InstaPark').controller('GarageController', ['$http', '$scope','$
       parkingFactory.setCarSelected(num);
       parkingFactory.setGarageLoc('WEST');
     }  
-
-    function twoDigitMonth(month) {
-      var theMonth = month+1; 
-      if (theMonth < 10) {
-        return "0" + theMonth;
-      }
-
-      return theMonth;
-    };
-
-    function twoDigitDay(day) {
-        if (day < 10) {
-          return "0" + day;
-        }
-
-        return day;
-    };
 
     garage.displayData = function(data) {
       if (data.type === 'reservation') {

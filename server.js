@@ -7,7 +7,6 @@ app.use(bodyParser.json({}));
 app.use('/css', express.static(__dirname + '/css'));
 app.use('/js', express.static(__dirname + '/js'));
 app.use('/images', express.static(__dirname + '/images'));
-app.use('/html', express.static(__dirname + '/html'));
 app.use('/templates', express.static(__dirname + '/templates'));
 
 app.get('/', function(request, response) {

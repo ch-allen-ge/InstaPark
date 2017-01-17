@@ -148,26 +148,6 @@ exports.createReservation = function(info, callback) {
 	});
 }
 
-exports.updateDefault = function(info, callback) {
-
-	var parkingSpot = info.parkingSpotId;
-
-	var setDefault = function(callbackTwo) {
-		connection.query('UPDATE parkingspot SET reservation_parker = "0", default_parker="1" WHERE id="'+parkingSpot.toString()+'"', function(err, result) {		
-			if (err) {  
-				console.log(err);
-			} else {
-				// console.log(result); 
-				callbackTwo();	
-			}
-		});
-	}
-
-	setDefault(function() {
-		callback();
-	});
-}
-
 exports.getAllDefaults = function(callback) {
 	var defaultList = [];
 
